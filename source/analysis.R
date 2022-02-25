@@ -2,9 +2,11 @@
 install.packages("tidyverse")
 install.packages("dplyr")
 install.packages("ggplot2")
+install.packages("zoo")
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
+library(zoo)
 
 # Load data from (https://github.com/vera-institute/incarceration-trends/blob/master/incarceration_trends.csv)
 
@@ -87,3 +89,28 @@ ratio_white_king_total_past <- past_king$white_pop_15to64/past_king$total_pop_15
 
 ratio_black_king_jail_past <- past_king$black_jail_pop / past_king$total_jail_pop
 ratio_white_king_jail_past <- past_king$white_jail_pop / past_king$total_jail_pop
+
+# Chart 1: Number of incarcerated black people vs incarcerated white people in King County over time
+
+king_inc_ratio_year <- prison_data %>%
+  filter(state == "WA") %>%
+  filter(county_name == "King County") %>%
+  filter(!is.na(black_jail_pop)) %>%
+  filter(!is.na(white_jail_pop)) %>%
+  filter(!is.na(black_pop_15to64)) %>%
+  filter(!is.na(white_pop_15to64)) %>%
+
+white_black_ratio_king_year <- ggplot(data = king_inc_ratio_year) +
+  geom_line(aes(x = year, y = black_jail_pop), color = "blue") +
+  geom_line(aes(x = year, y = white_jail_pop), color = "red")
+
+print(white_black_ratio_king_year)
+
+# Chart 2: Ratio of black to white population vs ratio of black to white inc population in US
+
+black_white_ratios_us <- prison_data %>%
+  filter(!is.na(black_jail_pop)) %>%
+  filter(!is.na(white_jail_pop)) %>%
+  filter(!is.na(black_pop_15to64)) %>%
+  filter(!is.na(white_pop_15to64))
+
