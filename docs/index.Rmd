@@ -41,7 +41,7 @@ I decided to look at these values to give me a sense of where specific racial gr
 
 - White: `r highest_ratio_white_inc`, `r highest_ratio_white_county`, `r highest_ratio_white_state`
 
-I chose to look at these variables as it is known that African Americans are at higher risk of incarceration in the United States compared to Caucasians, and this variable allows me to see where both African Americans and Caucasians are targeted by the prison system the most in the United States, and to what severity. 
+I chose to look at these variables as it is known that African Americans are at higher risk of incarceration in the United States compared to Caucasians, and this variable allows me to see where both African Americans and Caucasians are targeted by the prison system the most, and to what severity, in the United States. 
 
 **Value Three:** In the most recently recorded year, what is the average ratio of incarcerated black and white populations vs total racial population in a region?
 
@@ -57,13 +57,13 @@ I wanted to look at the average ratio of incarceration by race across the USA to
 
 - White: In King County, White people make up `r perc_white_king_total_curr`% of the population and `r perc_white_king_jail_curr`% of the incarcerated population.
 
-I specifically wanted to look at this issue in the context of King County, as this is where we live. I think seeing the rate of incarcerated African Americans comapred to Caucasians in an area we see as liberal and progressive shows us how deep this issue is ingrained into our society.
+I specifically wanted to look at this issue in the context of King County, as this is where we live. I think seeing the rate of incarcerated African Americans compared to Caucasians in an area we see as liberal and progressive shows us how deeply ingrained this issue is, in our society.
 
 **Value Five:** In the earliest recorded year, what is percent of the total population of King County was made up of African Americans vs Caucasians? What percent of the incarcerated population in the same year was made up of African Americans vs Caucasians?
 
 - Black: In the earliest recorded year, African Americans made up `r perc_black_king_total_past`% of the total population and `r perc_black_king_jail_past`% of the incarcerated population.
 
-- White: In the earliest recorded year, Caucasians made up `r perc_black_king_total_past`% of the total population and `r perc_black_king_jail_past`% of the incarcerated population.
+- White: In the earliest recorded year, Caucasians made up `r perc_white_king_total_past`% of the total population and `r perc_white_king_jail_past`% of the incarcerated population.
 
 After looking at the most recent data in King County, I wanted to see how incarceration rates changed from the past. I looked at the earliest recorded year, 1990, and will hopefully be able to see if the trend in incarceration by racial communities is increasing, decreasing, or remaining the same.
 
