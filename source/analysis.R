@@ -57,6 +57,16 @@ highest_aapi_jail_county <- highest_aapi_jail_curr %>%
 highest_aapi_jail_pop <- highest_aapi_jail_curr %>%
   pull(aapi_jail_pop)
 
+highest_native_jail_curr <- prison_data %>%
+  filter(year == max(year)) %>%
+  filter(native_jail_pop == max(native_jail_pop, na.rm = TRUE))
+highest_native_jail_state <- highest_native_jail_curr %>%
+  pull(state)
+highest_native_jail_county <- highest_native_jail_curr %>%
+  pull(county_name)
+highest_native_jail_pop <- highest_native_jail_curr %>%
+  pull(native_jail_pop)
+
 highest_other_jail_curr <- prison_data %>%
   filter(year == max(year)) %>%
   filter(other_race_jail_pop == max(other_race_jail_pop, na.rm = TRUE))
@@ -80,9 +90,21 @@ inc_ratio_curr <- prison_data %>%
 
 highest_ratio_black <- inc_ratio_curr %>%
   filter(black_jail_ratio == max(black_jail_ratio))
+highest_ratio_black_inc <- highest_ratio_black %>%
+  pull(black_jail_ratio)
+highest_ratio_black_county <- highest_ratio_black %>%
+  pull(county_name)
+highest_ratio_black_state <- highest_ratio_black %>%
+  pull(state)
 
 highest_ratio_white <- inc_ratio_curr %>%
   filter(white_jail_ratio == max(white_jail_ratio))
+highest_ratio_white_inc <- highest_ratio_white %>%
+  pull(white_jail_ratio)
+highest_ratio_white_county <- highest_ratio_white %>%
+  pull(county_name)
+highest_ratio_white_state <- highest_ratio_white %>%
+  pull(state)
 
 # Variable 3: In the most recent year, what is the mean ratio of the incarcerated black vs white population 
 
@@ -99,11 +121,11 @@ curr_king <- prison_data %>%
   filter(state == "WA") %>%
   filter(county_name == "King County")
 
-ratio_black_king_total_curr <- curr_king$black_pop_15to64/curr_king$total_pop_15to64
-ratio_white_king_total_curr <- curr_king$white_pop_15to64/curr_king$total_pop_15to64
+perc_black_king_total_curr <- (curr_king$black_pop_15to64/curr_king$total_pop_15to64) * 100
+perc_white_king_total_curr <- (curr_king$white_pop_15to64/curr_king$total_pop_15to64) * 100
 
-ratio_black_king_jail_curr <- curr_king$black_jail_pop / curr_king$total_jail_pop
-ratio_white_king_jail_curr <- curr_king$white_jail_pop / curr_king$total_jail_pop
+perc_black_king_jail_curr <- (curr_king$black_jail_pop / curr_king$total_jail_pop) * 100
+perc_white_king_jail_curr <- (curr_king$white_jail_pop / curr_king$total_jail_pop) * 100
 
 # Variable 5: Ratio of incarcerated black population compared to white population in King County, WA in 1990
 
@@ -116,11 +138,11 @@ past_king <- prison_data %>%
   filter(county_name == "King County") %>%
   filter(year == min(year))
 
-ratio_black_king_total_past <- past_king$black_pop_15to64/past_king$total_pop_15to64
-ratio_white_king_total_past <- past_king$white_pop_15to64/past_king$total_pop_15to64
+perc_black_king_total_past <- (past_king$black_pop_15to64/past_king$total_pop_15to64) * 100
+perc_white_king_total_past <- (past_king$white_pop_15to64/past_king$total_pop_15to64) * 100
 
-ratio_black_king_jail_past <- past_king$black_jail_pop / past_king$total_jail_pop
-ratio_white_king_jail_past <- past_king$white_jail_pop / past_king$total_jail_pop
+perc_black_king_jail_past <- (past_king$black_jail_pop / past_king$total_jail_pop) * 100
+perc_white_king_jail_past <- (past_king$white_jail_pop / past_king$total_jail_pop) * 100
 
 # Chart 1: Number of incarcerated black people vs incarcerated white people in King County over time
 
@@ -133,8 +155,13 @@ king_inc_ratio_year <- prison_data %>%
   filter(!is.na(white_pop_15to64))
 
 white_black_ratio_king_year <- ggplot(data = king_inc_ratio_year) +
-  geom_line(aes(x = year, y = black_jail_pop), color = "blue") +
-  geom_line(aes(x = year, y = white_jail_pop), color = "red")
+  geom_line(aes(x = year, y = black_jail_pop, color = "Black"), show.legend = TRUE) +
+  geom_line(aes(x = year, y = white_jail_pop, color = "White"), show.legend = TRUE) +
+  scale_color_manual(name = "Race",
+                     values = c("White" = "red", "Black" = "blue")) +
+  labs(x = "Year", y = "Number of incarcerated individuals (hundreds)") +
+  theme(legend.position = "right") +
+  ggtitle("Number of White and Black incarcerated peoples in King County from 1990 to 2018")
 
 print(white_black_ratio_king_year)
 
@@ -159,7 +186,9 @@ king_race_data <- data.frame(
 )
 
 race_king_chart <- ggplot(king_race_data, aes(x = race, y = inc_ratio)) +
-  geom_bar(stat = "identity")
+  geom_bar(stat = "identity") +
+  labs(x = "Race", y = "Ratio") +
+  ggtitle("Ratio of incarcerated individuals to total racial population by race in King County in 2018")
 
 print(race_king_chart)
 
@@ -194,6 +223,7 @@ black_inc_map <- ggplot(map_data) +
                size = 0.0001) +
   coord_map() +
   scale_fill_continuous(na.value = "gray", low = "blue", high = "red") +
+  ggtitle("Map of ratio of incarcerated African Americans to total African American population by county in 2018") +
   bt
 
 print(black_inc_map)
