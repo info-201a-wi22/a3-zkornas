@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Problem Domain: 
 ### Understanding racial injustice in American Incarceration
 
-In the last ten years Americans have begun to look critically at the justice system in our country. The clear pattern of racial injustice and continued systematic oppression of minorities, specifically African Americans, has been discussed in mainstream media.
+In the last ten years Americans have begun to look critically at the justice system in our country. The clear pattern of racial injustice and continued systematic oppression of minorities, specifically African Americans, has been discussed in mainstream media. The data analyzed in this report and sourced by _Vera, Institute of Justice_ shows just how severe the systematic oppression of minority groups in the USA is. In this report, we will analyze the data and uncover trends of how different racial groups in the United States are threatened by incarceration.
 
 
 ### Values of interest
