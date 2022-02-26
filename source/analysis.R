@@ -207,18 +207,15 @@ bt <- theme_bw() +
     plot.background = element_blank()
   )
 
-black_inc_percent <- inc_ratio_curr %>%
-  mutate(black_jail_percent = as.numeric(black_jail_ratio * 10))
-
 us_regions <- map_data("county") %>%
   unite(polyname, region, subregion, sep = ",") %>%
   left_join(county.fips, by = "polyname")
 
 map_data <- us_regions %>%
-  left_join(black_inc_percent, by = "fips")
+  left_join(inc_ratio_curr, by = "fips")
 
 black_inc_map <- ggplot(map_data) +
-  geom_polygon(mapping = aes(x = long, y = lat, group = group, fill = black_jail_percent),
+  geom_polygon(mapping = aes(x = long, y = lat, group = group, fill = black_jail_ratio),
                color = "white",
                size = 0.0001) +
   coord_map() +
