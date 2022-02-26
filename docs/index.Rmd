@@ -5,7 +5,8 @@ Date: "02/25/2022"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
+source("../source/analysis.R")
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -17,7 +18,7 @@ In the last ten years Americans have begun to look critically at the justice sys
 
 ### Values of interest
 
-**Value One:**
+**Value One:** 
 
 **Value Two:**
 
