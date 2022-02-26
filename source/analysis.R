@@ -193,7 +193,7 @@ race_king_chart <- ggplot(king_race_data, aes(x = race, y = inc_ratio)) +
 print(race_king_chart)
 
 
-# Chart 3:
+# Chart 3: Map of ratio of African American incarceration
 
 bt <- theme_bw() +
   theme(
@@ -225,7 +225,7 @@ black_inc_map <- ggplot(map_data) +
 
 print(black_inc_map)
 
-#Map white ratio
+
 
 
 
